@@ -32,3 +32,32 @@ utilize o comando:
 
 #### Informações complementares:
 * As mesmas do caso de uso Relatório de vendas
+
+## Endpoints
+
+### Busca venda por id
+```http
+  GET http://localhost:8080/sales/{id}
+```
+| PathVariable   | Tipo       |Descrição|
+| :---------- | :--------- | :------------------------------------------ |
+| `id`      | `Long` | **Obrigatório**. ID da venda |
+
+### Busca relatório (Paginada)
+```http
+http://localhost:8080/sales/report
+```
+| RequestParam   | Tipo       |Descrição|
+| :---------- | :--------- | :------------------------------------------ |
+| `minDate`      | `String` | **Opcional**. Data do início da busca |
+| `maxDate`      | `String` | **Opcional**. Data do término da busca |
+| `name`      | `String` | **Opcional**. Nome do vendedor |
+
+### Busca sumário
+```http
+http://localhost:8080/sales/summary
+```
+| RequestParam   | Tipo       |Descrição|
+| :---------- | :--------- | :------------------------------------------ |
+| `minDate`      | `String` | **Opcional**. Data do início da busca |
+| `maxDate`      | `String` | **Opcional**. Data do término da busca |
