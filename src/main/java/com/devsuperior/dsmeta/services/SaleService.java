@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,25 +41,22 @@ public class SaleService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<ReportDTO> getReport(String minDate, String maxDate, String name) {
+	public Page<ReportDTO> getReport(String minDate, String maxDate, String name, Pageable pageable) {
 		validateDate(minDate, maxDate);
-		return repository.getReport(minDateParsed, maxDateParsed, name);
+		return repository.getReport(minDateParsed, maxDateParsed, name, pageable);
 	}
 
 	private void validateDate(String minDate, String maxDate) {
-
 		if (maxDate.isEmpty()) {
 			maxDateParsed = LocalDate.ofInstant(Instant.now(), ZoneId.systemDefault());
 		} else {
 			maxDateParsed = LocalDate.parse(maxDate);
 		}
-
 		if (minDate.isEmpty()) {
 			minDateParsed = maxDateParsed.minusYears(1L);
 		} else {
 			minDateParsed = LocalDate.parse(minDate);
 		}
-
 	}
 
 }
